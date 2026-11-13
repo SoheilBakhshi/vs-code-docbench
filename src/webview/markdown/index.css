@@ -1,0 +1,132 @@
+/* Theme vditor with VS Code colours. Selectors are prefixed with `body` so they win over the
+   content-theme stylesheet that vditor injects at runtime. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
+}
+
+#app {
+  height: 100vh;
+}
+
+body .vditor,
+body .vditor--dark {
+  --border-color: var(--vscode-panel-border, var(--vscode-editorWidget-border, rgba(128, 128, 128, 0.35)));
+  --second-color: var(--vscode-descriptionForeground);
+  --panel-background-color: var(--vscode-editorWidget-background, var(--vscode-editor-background));
+  --toolbar-background-color: var(--vscode-editorGroupHeader-tabsBackground, var(--vscode-editor-background));
+  --toolbar-icon-color: var(--vscode-icon-foreground, var(--vscode-editor-foreground));
+  --toolbar-icon-hover-color: var(--vscode-textLink-foreground);
+  --textarea-background-color: var(--vscode-editor-background);
+  --textarea-text-color: var(--vscode-editor-foreground);
+  --heading-border-color: var(--border-color);
+  --blockquote-color: var(--vscode-descriptionForeground);
+  --blockquote-border-color: var(--vscode-textBlockQuote-border, var(--border-color));
+  --blockquote-text-color: var(--vscode-textBlockQuote-foreground, var(--vscode-descriptionForeground));
+  --count-background-color: var(--vscode-badge-background);
+  --ir-heading-color: var(--vscode-textLink-foreground);
+  --ir-link-color: var(--vscode-textLink-foreground);
+  --ir-title-color: var(--vscode-descriptionForeground);
+  border: 0;
+  border-radius: 0;
+  font-family: var(--vscode-font-family);
+  color: var(--vscode-editor-foreground);
+  background: var(--vscode-editor-background);
+}
+
+body .vditor .vditor-content,
+body .vditor .vditor-wysiwyg,
+body .vditor .vditor-ir,
+body .vditor .vditor-sv {
+  background: var(--vscode-editor-background);
+}
+
+body .vditor .vditor-reset {
+  color: var(--vscode-editor-foreground);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size, 14px);
+}
+
+body .vditor .vditor-reset a {
+  color: var(--vscode-textLink-foreground);
+}
+
+body .vditor .vditor-reset h1,
+body .vditor .vditor-reset h2 {
+  border-bottom-color: var(--border-color);
+}
+
+body .vditor .vditor-reset hr {
+  background-color: var(--border-color);
+}
+
+body .vditor .vditor-reset code:not(.hljs):not(.highlight-chroma),
+body .vditor .vditor-reset pre > code {
+  font-family: var(--vscode-editor-font-family, monospace);
+  background-color: var(--vscode-textCodeBlock-background, rgba(128, 128, 128, 0.15));
+  color: var(--vscode-editor-foreground);
+}
+
+body .vditor .vditor-reset pre > code {
+  background-image: none;
+}
+
+body .vditor .vditor-reset table tr {
+  background-color: transparent;
+  border-top-color: var(--border-color);
+}
+
+body .vditor .vditor-reset table td,
+body .vditor .vditor-reset table th {
+  border-color: var(--border-color);
+}
+
+body .vditor .vditor-reset table tbody tr:nth-child(2n) {
+  background-color: var(--vscode-editor-inactiveSelectionBackground, rgba(128, 128, 128, 0.1));
+}
+
+body .vditor .vditor-reset kbd {
+  color: var(--vscode-editor-foreground);
+  background-color: var(--panel-background-color);
+  border-color: var(--border-color);
+  box-shadow: none;
+}
+
+body .vditor .vditor-wysiwyg pre.vditor-reset,
+body .vditor .vditor-sv {
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
+  font-family: var(--vscode-editor-font-family, monospace);
+}
+
+body .vditor .vditor-toolbar__item .vditor-tooltipped::after,
+body .vditor .vditor-hint,
+body .vditor .vditor-panel {
+  background-color: var(--panel-background-color);
+  color: var(--vscode-editorWidget-foreground, var(--vscode-editor-foreground));
+  border-color: var(--border-color);
+}
+
+/* Ribbon tooltips are native `title`s (see addToolbarTooltips); hide vditor's own CSS bubble. */
+.vditor-toolbar .vditor-tooltipped::before,
+.vditor-toolbar .vditor-tooltipped::after {
+  display: none !important;
+}
+
+/* GitHub alerts (> [!NOTE] ...): coloured bar and tinted first line. Display only. */
+.vditor-reset blockquote[data-gh-alert] { border-left-width: 0.25em; border-left-style: solid; }
+.vditor-reset blockquote[data-gh-alert] > p:first-child { font-weight: 600; }
+.vditor-reset blockquote[data-gh-alert="note"] { border-left-color: #4493f8; }
+.vditor-reset blockquote[data-gh-alert="note"] > p:first-child { color: #4493f8; }
+.vditor-reset blockquote[data-gh-alert="tip"] { border-left-color: #3fb950; }
+.vditor-reset blockquote[data-gh-alert="tip"] > p:first-child { color: #3fb950; }
+.vditor-reset blockquote[data-gh-alert="important"] { border-left-color: #ab7df8; }
+.vditor-reset blockquote[data-gh-alert="important"] > p:first-child { color: #ab7df8; }
+.vditor-reset blockquote[data-gh-alert="warning"] { border-left-color: #d29922; }
+.vditor-reset blockquote[data-gh-alert="warning"] > p:first-child { color: #d29922; }
+.vditor-reset blockquote[data-gh-alert="caution"] { border-left-color: #f85149; }
+.vditor-reset blockquote[data-gh-alert="caution"] > p:first-child { color: #f85149; }

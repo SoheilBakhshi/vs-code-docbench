@@ -1,0 +1,34 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  overflow: auto;
+  background: #8a8a8a;
+  color: #000;
+  font-family: var(--vscode-font-family, sans-serif);
+}
+
+#docx-root {
+  min-height: 100%;
+  box-sizing: border-box;
+  padding: 12px 0;
+}
+
+/* docx-preview wrapper: neutral grey desk behind white pages */
+#docx-body .docx-wrapper {
+  background: transparent;
+  padding: 0 12px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+#docx-body .docx-wrapper > section.docx {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  margin-bottom: 12px;
+}

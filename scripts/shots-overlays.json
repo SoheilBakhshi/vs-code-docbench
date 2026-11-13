@@ -1,0 +1,154 @@
+{
+  "markdown-editor": [
+    {
+      "n": 1,
+      "x": 534,
+      "y": 91,
+      "w": 630,
+      "h": 32,
+      "label": "Ribbon: every button has a tooltip",
+      "lblStyle": "left:0;top:40px"
+    },
+    {
+      "n": 2,
+      "x": 1166,
+      "y": 93,
+      "w": 56,
+      "h": 28,
+      "label": "Export to PDF / Word",
+      "lblStyle": "left:-118px;top:40px"
+    },
+    {
+      "n": 3,
+      "x": 1484,
+      "y": 38,
+      "w": 64,
+      "h": 24,
+      "label": "Also in the title bar",
+      "lblStyle": "right:72px;top:-2px"
+    },
+    {
+      "n": 4,
+      "x": 506,
+      "y": 160,
+      "w": 852,
+      "h": 600,
+      "label": "WYSIWYG: edit it the way it will look",
+      "lblStyle": "right:12px;top:10px"
+    }
+  ],
+  "pdf-export": [
+    {
+      "n": 1,
+      "x": 290,
+      "y": 91,
+      "w": 380,
+      "h": 30,
+      "label": "Page jump, zoom, fit width",
+      "lblStyle": "left:0;top:40px"
+    },
+    {
+      "n": 2,
+      "x": 734,
+      "y": 130,
+      "w": 422,
+      "h": 592,
+      "label": "A PDF exported from Markdown, in the Docbench viewer",
+      "lblStyle": "left:440px;top:10px"
+    }
+  ],
+  "word-viewer": [
+    {
+      "n": 1,
+      "x": 616,
+      "y": 176,
+      "w": 656,
+      "h": 178,
+      "label": "Headings and formatting",
+      "lblStyle": "left:662px;top:6px"
+    },
+    {
+      "n": 2,
+      "x": 644,
+      "y": 388,
+      "w": 300,
+      "h": 66,
+      "label": "Lists",
+      "lblStyle": "left:312px;top:26px",
+      "nStyle": "left:-30px;top:20px"
+    },
+    {
+      "n": 3,
+      "x": 622,
+      "y": 457,
+      "w": 644,
+      "h": 124,
+      "label": "Tables",
+      "lblStyle": "left:656px;top:50px",
+      "nStyle": "left:-30px;top:-4px"
+    }
+  ],
+  "excel-charts": [
+    {
+      "n": 1,
+      "x": 290,
+      "y": 92,
+      "w": 286,
+      "h": 122,
+      "label": "The sheet's data",
+      "lblStyle": "left:300px;top:46px"
+    },
+    {
+      "n": 2,
+      "x": 296,
+      "y": 226,
+      "w": 1032,
+      "h": 580,
+      "label": "Charts read from the file and drawn below the data",
+      "lblStyle": "left:560px;top:8px",
+      "nStyle": "left:auto;right:-14px"
+    },
+    {
+      "n": 3,
+      "x": 290,
+      "y": 832,
+      "w": 330,
+      "h": 44,
+      "label": "Sheet tabs and chart count",
+      "lblStyle": "left:344px;top:8px",
+      "nStyle": "left:auto;right:-14px"
+    }
+  ],
+  "default-picker": [
+    {
+      "n": 1,
+      "x": 528,
+      "y": 98,
+      "w": 630,
+      "h": 174,
+      "label": "Tick the types you want",
+      "lblStyle": "left:644px;top:70px",
+      "nStyle": "left:-34px;top:-4px"
+    },
+    {
+      "n": 2,
+      "x": 528,
+      "y": 275,
+      "w": 630,
+      "h": 48,
+      "label": "HTML is offered, not pre-ticked",
+      "lblStyle": "left:644px;top:8px",
+      "nStyle": "left:-34px;top:2px"
+    },
+    {
+      "n": 3,
+      "x": 1016,
+      "y": 62,
+      "w": 140,
+      "h": 30,
+      "label": "Confirm with OK",
+      "lblStyle": "left:152px;top:2px",
+      "nStyle": "left:-26px;top:auto;bottom:-16px"
+    }
+  ]
+}

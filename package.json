@@ -1,0 +1,321 @@
+{
+  "name": "docbench",
+  "displayName": "Docbench",
+  "description": "Open source, telemetry-free viewers and editors for Markdown, PDF, DOCX, XLSX/CSV and HTML files.",
+  "version": "0.6.2",
+  "publisher": "biinsight",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#0E1A57",
+    "theme": "dark"
+  },
+  "preview": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SoheilBakhshi/vs-code-docbench"
+  },
+  "homepage": "https://github.com/SoheilBakhshi/vs-code-docbench#readme",
+  "bugs": {
+    "url": "https://github.com/SoheilBakhshi/vs-code-docbench/issues"
+  },
+  "qna": false,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "wysiwyg",
+    "markdown to pdf",
+    "pdf viewer",
+    "docx",
+    "xlsx",
+    "csv",
+    "spreadsheet",
+    "charts",
+    "html preview",
+    "http client",
+    "viewer",
+    "editor"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "In Restricted Mode, scripts inside HTML previews are disabled. Everything else works."
+    }
+  },
+  "main": "./out/extension.js",
+  "browser": "./out/extension-web.js",
+  "activationEvents": [],
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "docbench.spreadsheet",
+        "displayName": "Docbench: Spreadsheet",
+        "selector": [
+          {
+            "filenamePattern": "*.csv"
+          },
+          {
+            "filenamePattern": "*.tsv"
+          },
+          {
+            "filenamePattern": "*.xls"
+          },
+          {
+            "filenamePattern": "*.xlsx"
+          },
+          {
+            "filenamePattern": "*.xlsm"
+          },
+          {
+            "filenamePattern": "*.ods"
+          }
+        ],
+        "priority": "option"
+      },
+      {
+        "viewType": "docbench.xlsxEditor",
+        "displayName": "Docbench: Spreadsheet (Edit)",
+        "selector": [
+          {
+            "filenamePattern": "*.xlsx"
+          },
+          {
+            "filenamePattern": "*.xlsm"
+          },
+          {
+            "filenamePattern": "*.xls"
+          },
+          {
+            "filenamePattern": "*.csv"
+          }
+        ],
+        "priority": "option"
+      },
+      {
+        "viewType": "docbench.docx",
+        "displayName": "Docbench: DOCX",
+        "selector": [
+          {
+            "filenamePattern": "*.docx"
+          },
+          {
+            "filenamePattern": "*.dotx"
+          }
+        ],
+        "priority": "option"
+      },
+      {
+        "viewType": "docbench.pdf",
+        "displayName": "Docbench: PDF",
+        "selector": [
+          {
+            "filenamePattern": "*.pdf"
+          }
+        ],
+        "priority": "option"
+      },
+      {
+        "viewType": "docbench.markdown",
+        "displayName": "Docbench: Markdown",
+        "selector": [
+          {
+            "filenamePattern": "*.md"
+          },
+          {
+            "filenamePattern": "*.markdown"
+          }
+        ],
+        "priority": "option"
+      },
+      {
+        "viewType": "docbench.html",
+        "displayName": "Docbench: HTML Preview",
+        "selector": [
+          {
+            "filenamePattern": "*.html"
+          },
+          {
+            "filenamePattern": "*.htm"
+          }
+        ],
+        "priority": "option"
+      }
+    ],
+    "commands": [
+      {
+        "command": "docbench.chooseDefaults",
+        "title": "Choose Default File Types…",
+        "category": "Docbench"
+      },
+      {
+        "command": "docbench.openInViewer",
+        "title": "Open in Docbench",
+        "category": "Docbench"
+      },
+      {
+        "command": "docbench.openInEditor",
+        "title": "Edit Spreadsheet in Docbench",
+        "category": "Docbench"
+      },
+      {
+        "command": "docbench.openHtmlPreview",
+        "title": "Docbench: Open HTML Preview"
+      },
+      {
+        "command": "docbench.sendHttpRequest",
+        "title": "Send HTTP Request",
+        "icon": "$(play)"
+      },
+      {
+        "command": "docbench.exportMarkdownPdf",
+        "title": "Export Markdown to PDF",
+        "category": "Docbench",
+        "icon": {
+          "light": "assets/icons/pdf-light.svg",
+          "dark": "assets/icons/pdf-dark.svg"
+        }
+      },
+      {
+        "command": "docbench.exportMarkdownDocx",
+        "title": "Export Markdown to Word",
+        "category": "Docbench",
+        "icon": {
+          "light": "assets/icons/docx-light.svg",
+          "dark": "assets/icons/docx-dark.svg"
+        }
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "docbench.openHtmlPreview",
+        "key": "ctrl+shift+v",
+        "mac": "cmd+shift+v",
+        "when": "editorTextFocus && (resourceExtname == .html || resourceExtname == .htm)"
+      },
+      {
+        "command": "docbench.sendHttpRequest",
+        "key": "ctrl+enter",
+        "mac": "cmd+enter",
+        "when": "editorTextFocus && (resourceExtname == .http || resourceExtname == .rest)"
+      }
+    ],
+    "languages": [
+      {
+        "id": "http",
+        "aliases": [
+          "HTTP",
+          "HTTP Request"
+        ],
+        "extensions": [
+          ".http",
+          ".rest"
+        ]
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "docbench.openInViewer",
+          "when": "resourceExtname =~ /^\\.(pdf|docx|dotx|xlsx|xlsm|xls|ods|csv|tsv|md|markdown|html|htm)$/i",
+          "group": "navigation@90"
+        },
+        {
+          "command": "docbench.openInEditor",
+          "when": "resourceExtname =~ /^\\.(xlsx|xlsm|xls|csv)$/i",
+          "group": "navigation@91"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "docbench.openInViewer",
+          "when": "resourceExtname =~ /^\\.(pdf|docx|dotx|xlsx|xlsm|xls|ods|csv|tsv|md|markdown|html|htm)$/i",
+          "group": "1_open@90"
+        },
+        {
+          "command": "docbench.openInEditor",
+          "when": "resourceExtname =~ /^\\.(xlsx|xlsm|xls|csv)$/i",
+          "group": "1_open@91"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "docbench.openInViewer",
+          "when": "resourceExtname =~ /^\\.(pdf|docx|dotx|xlsx|xlsm|xls|ods|csv|tsv|md|markdown|html|htm)$/i"
+        },
+        {
+          "command": "docbench.openInEditor",
+          "when": "resourceExtname =~ /^\\.(xlsx|xlsm|xls|csv)$/i"
+        },
+        {
+          "command": "docbench.exportMarkdownPdf",
+          "when": "activeCustomEditorId == docbench.markdown"
+        },
+        {
+          "command": "docbench.exportMarkdownDocx",
+          "when": "activeCustomEditorId == docbench.markdown"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "docbench.exportMarkdownPdf",
+          "when": "activeCustomEditorId == docbench.markdown",
+          "group": "navigation@5"
+        },
+        {
+          "command": "docbench.sendHttpRequest",
+          "when": "resourceExtname == .http || resourceExtname == .rest",
+          "group": "navigation@1"
+        },
+        {
+          "command": "docbench.exportMarkdownDocx",
+          "when": "activeCustomEditorId == docbench.markdown",
+          "group": "navigation@6"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Docbench",
+      "properties": {
+        "docbench.pdfExport.browserPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Full path to a Chromium-based browser (Edge, Chrome, Chromium, Brave) used to print Markdown to PDF. Leave empty to detect one automatically. Desktop only.",
+          "scope": "machine"
+        },
+        "docbench.markdown.loadRemoteImages": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Show images that are loaded from the internet (`https://` links, such as badges) in the Markdown editor. Off by default so the editor makes no network requests on its own. Needs a trusted workspace. Local images always show."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "vscode:prepublish": "node esbuild.mjs --production",
+    "package": "vsce package --no-dependencies --allow-missing-repository --skip-license"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^4.0.0",
+    "chart.js": "^4.6.1",
+    "docx": "^9.14.0",
+    "docx-preview": "^0.4.1",
+    "esbuild": "^0.28.2",
+    "jszip": "^3.10.2",
+    "pdfjs-dist": "^6.4.299",
+    "typescript": "^6.0.3",
+    "vditor": "^4.0.1",
+    "x-data-spreadsheet": "^1.1.9",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  }
+}
