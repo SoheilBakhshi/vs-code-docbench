@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.3
+
+### Changed
+- Repository banner image updated to name file types by extension. No change to the extension itself.
+
 ## 0.6.2
 
 ### Changed

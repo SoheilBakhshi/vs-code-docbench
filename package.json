@@ -2,7 +2,7 @@
   "name": "docbench",
   "displayName": "Docbench",
   "description": "Open source, telemetry-free viewers and editors for Markdown, PDF, DOCX, XLSX/CSV and HTML files.",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "publisher": "biinsight",
   "license": "MIT",
   "icon": "assets/icon.png",

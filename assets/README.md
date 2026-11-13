@@ -8,14 +8,14 @@
 
 ## The design
 
-A stack of translucent glass pages on a deep indigo-to-cyan tile: the pink and blue pages behind are the other formats, and the crisp front page carries a heading pill, text lines and a four-colour bar for the types Docbench opens: PDF (red), Word (blue), Excel (green) and Markdown (violet). Soft pink and cyan glows, a subtle top sheen and a glass rim give it depth. The shapes stay legible down to 16 x 16 px.
+A stack of translucent glass pages on a deep indigo-to-cyan tile: the pink and blue pages behind are the other formats, and the crisp front page carries a heading pill, text lines and a four-colour bar for the types Docbench opens: PDF (red), DOCX (blue), XLSX (green) and Markdown (violet). Soft pink and cyan glows, a subtle top sheen and a glass rim give it depth. The shapes stay legible down to 16 x 16 px.
 
 | Role | Colour |
 |---|---|
 | Tile gradient | `#1A1763` to `#4527C9` to `#0A8FD6` |
 | Glows | pink `#FF3FBF` (top left), cyan `#22E5F2` (bottom right) |
 | Heading pill | `#22D3EE` to `#8B5CF6` |
-| PDF / Word / Excel / Markdown bar | `#FF4D6D` / `#3B82F6` / `#10C98F` / `#9B6BFF` |
+| PDF / DOCX / XLSX / Markdown bar | `#FF4D6D` / `#3B82F6` / `#10C98F` / `#9B6BFF` |
 
 ## Regenerating the PNGs
 
