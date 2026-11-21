@@ -1,0 +1,44 @@
+export const mathRenderAdapter = {
+    getCode: (el: Element) => el.textContent,
+    getElements: (element: HTMLElement| Document) => element.querySelectorAll(".language-math"),
+};
+export const SMILESRenderAdapter = {
+    getCode: (el: Element) => el.textContent,
+    getElements: (element: HTMLElement| Document) => element.querySelectorAll(".language-smiles"),
+};
+export const mermaidRenderAdapter = {
+    getCode: (el: Element) => el.textContent,
+    getElements: (element: HTMLElement| Document) => element.querySelectorAll(".language-mermaid"),
+};
+export const markmapRenderAdapter = {
+    getCode: (el: Element) => el.textContent,
+    getElements: (element: HTMLElement| Document) => element.querySelectorAll(".language-markmap"),
+};
+export const mindmapRenderAdapter = {
+    getCode: (el: Element) => el.getAttribute("data-code"),
+    getElements: (el: HTMLElement | Document) => el.querySelectorAll(".language-mindmap"),
+};
+export const chartRenderAdapter = {
+    getCode: (el: HTMLElement) => el.innerText,
+    getElements: (el: HTMLElement | Document) => el.querySelectorAll(".language-echarts"),
+};
+export const abcRenderAdapter = {
+    getCode: (el: Element) => el.textContent,
+    getElements: (el: HTMLElement | Document) => el.querySelectorAll(".language-abc"),
+};
+export const graphvizRenderAdapter = {
+    getCode: (el: Element) => el.textContent,
+    getElements: (el: HTMLElement | Document) => el.querySelectorAll(".language-graphviz"),
+};
+export const wavedromRenderAdapter = {
+    getCode: (el: Element) => el.textContent,
+    getElements: (el: HTMLElement | Document) => el.querySelectorAll(".language-wavedrom"),
+};
+export const flowchartRenderAdapter = {
+    getCode: (el: Element) => el.textContent,
+    getElements: (el: HTMLElement | Document) => el.querySelectorAll(".language-flowchart"),
+};
+export const plantumlRenderAdapter = {
+    getCode: (el: Element) => el.textContent,
+    getElements: (el: HTMLElement | Document) => el.querySelectorAll(".language-plantuml"),
+};

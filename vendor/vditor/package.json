@@ -1,0 +1,16 @@
+{
+  "name": "vditor",
+  "version": "4.0.1-docbench.1",
+  "description": "Minimal fork of the Vditor 4.0.1 Markdown editor for Docbench. See PROVENANCE.md.",
+  "license": "MIT",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "diff-match-patch": "^1.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vanessa219/vditor"
+  }
+}

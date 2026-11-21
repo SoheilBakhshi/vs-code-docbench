@@ -1,0 +1,20 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--vscode-editor-background);
+}
+
+#app {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* x-spreadsheet draws on a light canvas; invert it for dark themes. */
+body.vscode-dark .x-spreadsheet,
+body.vscode-high-contrast:not(.vscode-high-contrast-light) .x-spreadsheet {
+  filter: invert(0.9) hue-rotate(180deg);
+}

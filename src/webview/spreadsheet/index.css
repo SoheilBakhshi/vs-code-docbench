@@ -1,0 +1,86 @@
+html, body { height: 100%; margin: 0; padding: 0; }
+body {
+  color: var(--vscode-editor-foreground);
+  background: var(--vscode-editor-background);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+}
+#app { display: flex; flex-direction: column; height: 100vh; }
+.scroller { flex: 1; overflow: auto; }
+table { border-collapse: separate; border-spacing: 0; font-family: var(--vscode-editor-font-family, monospace); }
+td, th {
+  border-right: 1px solid var(--vscode-editorGroup-border, rgba(128, 128, 128, 0.35));
+  border-bottom: 1px solid var(--vscode-editorGroup-border, rgba(128, 128, 128, 0.35));
+  padding: 2px 8px;
+  white-space: pre;
+  max-width: 480px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+td.num { text-align: right; }
+thead th {
+  position: sticky; top: 0; z-index: 2;
+  background: var(--vscode-editorWidget-background, var(--vscode-sideBar-background));
+  color: var(--vscode-descriptionForeground);
+  font-weight: normal;
+}
+th.rownum {
+  position: sticky; left: 0; z-index: 1;
+  background: var(--vscode-editorWidget-background, var(--vscode-sideBar-background));
+  color: var(--vscode-descriptionForeground);
+  font-weight: normal; text-align: right;
+}
+thead th.corner { left: 0; z-index: 3; }
+.empty { padding: 16px; color: var(--vscode-descriptionForeground); }
+.tabs {
+  display: flex; overflow-x: auto; flex: none;
+  background: var(--vscode-editorGroupHeader-tabsBackground);
+  border-top: 1px solid var(--vscode-editorGroup-border, rgba(128, 128, 128, 0.35));
+}
+.tab {
+  flex: none; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  padding: 4px 12px; border: 0; cursor: pointer;
+  color: var(--vscode-tab-inactiveForeground);
+  background: var(--vscode-tab-inactiveBackground);
+  font: inherit;
+}
+.tab:hover { color: var(--vscode-tab-activeForeground); }
+.tab.active {
+  color: var(--vscode-tab-activeForeground);
+  background: var(--vscode-tab-activeBackground);
+  box-shadow: inset 0 -2px 0 var(--vscode-focusBorder);
+}
+.status {
+  flex: none; display: flex; gap: 16px; padding: 2px 12px;
+  background: var(--vscode-statusBar-background);
+  color: var(--vscode-statusBar-foreground);
+  font-size: 12px;
+}
+.truncated { color: var(--vscode-editorWarning-foreground, #cca700); font-weight: bold; }
+
+.charts-heading {
+  margin: 20px 8px 8px;
+  font-weight: 600;
+  color: var(--vscode-descriptionForeground);
+}
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0 8px 16px;
+}
+.chart-card {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 8px;
+  border: 1px solid var(--vscode-panel-border, rgba(128, 128, 128, 0.35));
+  border-radius: 4px;
+  background: var(--vscode-editor-background);
+}
+.chart-unsupported {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--vscode-descriptionForeground);
+}

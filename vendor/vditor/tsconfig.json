@@ -1,0 +1,7 @@
+{
+  "//": "Read by esbuild when it compiles this fork. Vditor was written for TypeScript's legacy class-field semantics.",
+  "compilerOptions": {
+    "target": "ES2018",
+    "useDefineForClassFields": false
+  }
+}

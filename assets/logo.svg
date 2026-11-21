@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title desc">
+  <title id="title">Docbench logo</title>
+  <desc id="desc">A stack of translucent glass pages, with a crisp front page carrying a colour bar for the file types Docbench opens, on a deep indigo-to-cyan tile.</desc>
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1A1763"/>
+      <stop offset="0.55" stop-color="#4527C9"/>
+      <stop offset="1" stop-color="#0A8FD6"/>
+    </linearGradient>
+    <radialGradient id="glowCyan" cx="0.82" cy="0.92" r="0.62">
+      <stop offset="0" stop-color="#22E5F2" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#22E5F2" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPink" cx="0.12" cy="0.06" r="0.6">
+      <stop offset="0" stop-color="#FF3FBF" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#FF6FD8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="sheet" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E8EDFF"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="10" stdDeviation="9" flood-color="#080530" flood-opacity="0.5"/>
+    </filter>
+    <filter id="soft" x="-30%" y="-100%" width="160%" height="300%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <clipPath id="tileClip"><rect width="256" height="256" rx="60"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#tileClip)">
+    <!-- tile: deep gradient with two colour glows and a soft top sheen -->
+    <rect width="256" height="256" fill="url(#tile)"/>
+    <rect width="256" height="256" fill="url(#glowCyan)"/>
+    <rect width="256" height="256" fill="url(#glowPink)"/>
+    <ellipse cx="128" cy="-40" rx="190" ry="120" fill="url(#sheen)"/>
+
+    <g transform="translate(12 -2)">
+    <!-- floor shadow -->
+    <ellipse cx="132" cy="214" rx="64" ry="9" fill="#06042A" opacity="0.5" filter="url(#soft)"/>
+
+    <!-- back glass pages: the other formats, fanned out behind -->
+    <g transform="translate(-26 8) rotate(-15 128 128)" filter="url(#lift)">
+      <rect x="80" y="48" width="98" height="136" rx="15" fill="url(#glass)" stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="1.5"/>
+      <rect x="80" y="48" width="98" height="136" rx="15" fill="#FF4FA3" fill-opacity="0.4"/>
+    </g>
+    <g transform="translate(-13 4) rotate(-7.5 128 128)" filter="url(#lift)">
+      <rect x="80" y="48" width="98" height="136" rx="15" fill="url(#glass)" stroke="#FFFFFF" stroke-opacity="0.65" stroke-width="1.5"/>
+      <rect x="80" y="48" width="98" height="136" rx="15" fill="#2FB4FF" fill-opacity="0.36"/>
+    </g>
+
+    <!-- front page -->
+    <g filter="url(#lift)">
+      <path d="M92 50h58l32 32v98a14 14 0 0 1-14 14H92a14 14 0 0 1-14-14V64a14 14 0 0 1 14-14z" fill="url(#sheet)"/>
+    </g>
+    <path d="M150 50v20a12 12 0 0 0 12 12h20z" fill="#C4CEFF"/>
+    <path d="M150 50v20a12 12 0 0 0 12 12h20z" fill="url(#sheen)" opacity="0.6"/>
+
+    <!-- content: heading pill, text lines, format bar -->
+    <rect x="96" y="96" width="54" height="12" rx="6" fill="url(#accent)"/>
+    <rect x="96" y="120" width="70" height="7" rx="3.5" fill="#C9D2F5"/>
+    <rect x="96" y="134" width="70" height="7" rx="3.5" fill="#C9D2F5"/>
+    <rect x="96" y="148" width="44" height="7" rx="3.5" fill="#C9D2F5"/>
+    <rect x="96" y="166" width="16" height="9" rx="4.5" fill="#FF4D6D"/>
+    <rect x="114" y="166" width="16" height="9" rx="4.5" fill="#3B82F6"/>
+    <rect x="132" y="166" width="16" height="9" rx="4.5" fill="#10C98F"/>
+    <rect x="150" y="166" width="16" height="9" rx="4.5" fill="#9B6BFF"/>
+    </g>
+  </g>
+  <!-- glass rim on the tile -->
+  <rect x="1" y="1" width="254" height="254" rx="59" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2"/>
+</svg>
