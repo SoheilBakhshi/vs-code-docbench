@@ -96,12 +96,18 @@ async function sendRequest(req: ResolvedRequest, token: vscode.CancellationToken
 
   try {
     const headers = new Headers();
+    const skipped: string[] = [];
     for (const [name, value] of req.headers) {
       try {
         headers.append(name, value);
       } catch {
-        // Skip header names/values the platform refuses (e.g. forbidden headers in web hosts).
+        // The platform refuses this header (a value outside Latin-1, a forbidden header in web
+        // hosts, ...). It is left out, and the user is told which ones below.
+        skipped.push(name);
       }
+    }
+    if (skipped.length) {
+      reportSkippedHeaders(req.headers.filter(([name]) => skipped.includes(name)));
     }
     const hasBody = req.body.length > 0 && req.method !== 'GET' && req.method !== 'HEAD';
     const response = await fetch(req.url, {
@@ -126,6 +132,19 @@ async function sendRequest(req: ResolvedRequest, token: vscode.CancellationToken
     clearTimeout(timer);
     cancelSub.dispose();
   }
+}
+
+/** Tells the user which headers were not sent and why (HTTP header values cannot carry text outside Latin-1). */
+function reportSkippedHeaders(headers: [string, string][]): void {
+  const nonLatin1 = (v: string) => /[^\u0000-\u00ff]/.test(v);
+  const names = [...new Set(headers.map(([name]) => name))];
+  const encodable = headers.some(([, value]) => nonLatin1(value));
+  const why = encodable
+    ? 'HTTP header values cannot carry characters outside Latin-1 unencoded; percent-encode the value (for example with encodeURIComponent) if the server expects that'
+    : 'the platform refused them';
+  void vscode.window.showWarningMessage(
+    `Docbench: ${names.length === 1 ? 'header' : 'headers'} not sent: ${names.join(', ')}. ${why[0].toUpperCase()}${why.slice(1)}.`,
+  );
 }
 
 function describeError(err: unknown): string {

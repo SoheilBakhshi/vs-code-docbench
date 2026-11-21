@@ -52,7 +52,10 @@ Names below refer to rule ids in `scripts/content-policy/rules.mjs`; the policy 
    and PlantUML diagrams show an error instead of being sent to a remote rendering server.
 7. **Font stacks**: two Chinese font families removed from the three `font-family` stacks in
    `dist/index.css` (`cjk-font`). Text in any script still renders through the browser's font fallback.
-8. **Code-block copy button** falls back to "Copy" / "Copied" instead of Chinese text.
+8. **Code-block copy button** falls back to "Copy" / "Copied" instead of Chinese text, and is built with
+   DOM calls and `addEventListener` (`src/ts/markdown/codeRender.ts`) instead of inline `onmouseover` /
+   `onclick` attributes, which a nonce-only `script-src` CSP blocks (upstream, Copy did nothing in
+   Docbench's webview). Behaviour is unchanged: select the hidden textarea, copy, show "Copied".
 9. **Build compatibility**: `src/ts/undo/index.ts` calls `new DiffMatchPatch.diff_match_patch()`, because
    esbuild does not allow calling an `import * as` namespace (upstream relied on webpack behaviour).
 10. **Lute engine** (`dist/js/lute/lute.min.js`, exact, counted string edits on the minified upstream file):
@@ -69,7 +72,7 @@ Names below refer to rule ids in `scripts/content-policy/rules.mjs`; the policy 
 12. **Image preview overlay** (`src/ts/preview/image.ts`, opened by double-clicking an image): its close
     button and its backdrop closed the overlay through inline `onclick` attributes, which a nonce-only
     `script-src` CSP blocks, so the overlay could not be closed. Both now close through `addEventListener`;
-    the close button is found by `data-type="close"`.
+    the close button is found by `data-type="close"`. Escape also closes it.
 13. Upstream MIT licence banners at the top of `dist/index.css` and the content themes are kept verbatim.
 
 Files removed from the upstream package (not copied into the fork): `README.md` (Chinese), the
@@ -257,7 +260,7 @@ Status `verbatim`: identical to the upstream file. `modified`: changed as descri
 | src/ts/markdown/adapterRender.ts | modified | 997af5fc48bc0f9e | 962a513f69408154 |
 | src/ts/markdown/anchorRender.ts | verbatim | ea758917899b0953 | ea758917899b0953 |
 | src/ts/markdown/chartRender.ts | verbatim | 6994a60e7e3573ec | 6994a60e7e3573ec |
-| src/ts/markdown/codeRender.ts | modified | c58f35ea5cd4a629 | 67d0a46ddae596d7 |
+| src/ts/markdown/codeRender.ts | modified | c58f35ea5cd4a629 | 4186f05abf366f36 |
 | src/ts/markdown/flowchartRender.ts | verbatim | 574b2118a81c27fc | 574b2118a81c27fc |
 | src/ts/markdown/getHTML.ts | verbatim | 6b0da69592da40fe | 6b0da69592da40fe |
 | src/ts/markdown/getMarkdown.ts | verbatim | 724ce7edfc29f5a3 | 724ce7edfc29f5a3 |
@@ -277,7 +280,7 @@ Status `verbatim`: identical to the upstream file. `modified`: changed as descri
 | src/ts/markdown/speechRender.ts | modified | f9bf5b8dfc0e80c4 | 24ffbade71354b43 |
 | src/ts/markdown/wavedromRender.ts | verbatim | 35cf60f73ad55c64 | 35cf60f73ad55c64 |
 | src/ts/outline/index.ts | verbatim | 2ed44ff8cbfb8470 | 2ed44ff8cbfb8470 |
-| src/ts/preview/image.ts | modified | e7570976a5613ddc | 6a4563ea26c317f9 |
+| src/ts/preview/image.ts | modified | e7570976a5613ddc | f210127f2a9c2c34 |
 | src/ts/preview/index.ts | modified | 50f4c73326b6a22f | 57f9137065db19cf |
 | src/ts/resize/index.ts | verbatim | b6003fa8f1c7a012 | b6003fa8f1c7a012 |
 | src/ts/sv/index.ts | verbatim | 550174d94149c3cd | 550174d94149c3cd |

@@ -346,7 +346,7 @@ describe('markdown editor', () => {
     assert.equal(countOf(lastDocx.paragraphs.join('\n'), S.IDEOGRAPHIC_SPACE), countOf(S.MARKDOWN_DOC, S.IDEOGRAPHIC_SPACE), bug);
   });
 
-  test('Export to Word embeds images that are next to the document', { ...TIMEOUT, todo: "known bug since 0.6.x (not from the content clean-up): toDocx compares image URLs with the decoded origin, so webview image addresses do not match; needs checking in a real VS Code window" }, async () => {
+  test('Export to Word embeds images that are next to the document', TIMEOUT, async () => {
     const { panel } = await openSample();
     host.state.saveDialogTarget = Uri.file(path.join(host.workspace, 'docs', 'sample-images.docx'));
     await host.state.commands.get('docbench.exportMarkdownDocx')();
@@ -402,7 +402,7 @@ describe('markdown editor', () => {
     assertContained(panel);
   });
 
-  test('Export to PDF includes images that are next to the document', { ...TIMEOUT, todo: "known bug since 0.6.x: the print page CSP allows only file: and data: images, but the export HTML keeps webview image addresses" }, async () => {
+  test('Export to PDF includes images that are next to the document', TIMEOUT, async () => {
     const { panel } = await openSample();
     host.state.config['docbench.pdfExport.browserPath'] = browserWrapper();
     const target = path.join(host.workspace, 'docs', 'sample-images.pdf');
@@ -421,7 +421,7 @@ describe('markdown editor', () => {
     );
   });
 
-  test('the "images from the internet" notice does not appear for a document with only local images', { ...TIMEOUT, todo: "known bug since 0.6.x: the notice tests src for https:, which webview addresses of local images also match" }, async () => {
+  test('the "images from the internet" notice does not appear for a document with only local images', TIMEOUT, async () => {
     const { page } = await openSample();
     await page.waitForTimeout(600); // the check runs 400 ms after the document arrives
     const notice = await page.evaluate(() => document.getElementById('remote-images-notice')?.textContent ?? null);
@@ -434,7 +434,7 @@ describe('markdown editor', () => {
     );
   });
 
-  test('the webview runs under its nonce-only CSP without violations', { ...TIMEOUT, todo: "known bug in upstream Vditor: the code-block Copy button uses inline event handlers, which the nonce-only CSP blocks" }, async () => {
+  test('the webview runs under its nonce-only CSP without violations', TIMEOUT, async () => {
     const { panel } = await openSample();
     assert.deepEqual(
       panel.cspViolations,
@@ -464,6 +464,10 @@ describe('markdown editor', () => {
     await openOverlay();
     await page.click('.vditor-img__img', { position: { x: 5, y: 5 } });
     assert.deepEqual(await overlay(), { open: 0, overflow: '' }, 'a click on the backdrop closes the overlay');
+    // Escape.
+    await openOverlay();
+    await page.keyboard.press('Escape');
+    assert.deepEqual(await overlay(), { open: 0, overflow: '' }, 'Escape closes the overlay');
     assert.deepEqual(
       panel.cspViolations.slice(before),
       [],
@@ -818,7 +822,7 @@ describe('http client', () => {
     });
   });
 
-  test('sender: header values with CJK text are sent or reported, never silently dropped', { ...TIMEOUT, todo: "known bug since 0.6.x: header values outside Latin-1 are skipped without telling the user (HTTP headers cannot carry them unencoded)" }, async () => {
+  test('sender: header values with CJK text are sent or reported, never silently dropped', TIMEOUT, async () => {
     await withEchoServer(async (base, seen) => {
       host.state.messages.length = 0;
       const text = S.HTTP_FILE.replaceAll('{{base}}', base);

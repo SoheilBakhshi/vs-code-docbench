@@ -12,6 +12,7 @@ eslint.config.mjs
 AGENTS.md
 CLAUDE.md
 .gitignore
+.gitattributes
 tmp/**
 dist/**
 docs/**

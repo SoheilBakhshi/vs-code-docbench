@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.6
+
+### Fixed
+- Export to Word now embeds images stored next to the Markdown file.
+- Export to PDF now includes images stored next to the Markdown file.
+- The "images from the internet" notice no longer appears for documents whose images are all local.
+- The Copy button on code blocks in the Markdown editor now works (the editor's security policy blocked it).
+- `.http` requests: header values that cannot be sent (characters outside Latin-1) are now reported instead of being dropped silently.
+
+### Internal
+- The Markdown editor's image preview now closes (button, backdrop, Escape) through the editor's own code; the separate workaround is gone.
+- The Vditor fork is checked out byte for byte on every platform (`.gitattributes`), so its provenance check also passes on Windows.
+
 ## 0.6.5
 
 ### Changed
@@ -9,7 +22,7 @@
 ### Fixed
 - Typing paired punctuation with a Chinese input method in the Markdown editor no longer gets interrupted (an earlier build step removed the editor's guard for it).
 - Export to Word keeps ideographic (full-width) and no-break spaces instead of turning them into ordinary spaces.
-- The image preview that opens when you double-click an image in the Markdown editor can be closed again (its Close button and backdrop did nothing).
+- The image preview that opens when you double-click an image in the Markdown editor no longer triggers security-policy errors when it opens or closes.
 
 ### Internal
 - New content-policy checks scan the source tree and every file of the packaged `.vsix`, and the release workflow stops if any check fails. Feature tests open Markdown, PDF, Word, spreadsheet and HTML documents with Chinese, Japanese and Korean text.

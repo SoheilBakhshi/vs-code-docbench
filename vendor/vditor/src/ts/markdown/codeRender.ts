@@ -41,10 +41,26 @@ export const codeRender = (element: HTMLElement, option?: IHljs) => {
 
         const divElement = document.createElement("div");
         divElement.className = "vditor-copy";
-        divElement.innerHTML = `<span aria-label="${window.VditorI18n?.copy || "Copy"}"
-onmouseover="this.setAttribute('aria-label', '${window.VditorI18n?.copy || "Copy"}')"
-class="vditor-tooltipped vditor-tooltipped__w"
-onclick="event.stopPropagation();this.previousElementSibling.select();document.execCommand('copy');this.setAttribute('aria-label', '${window.VditorI18n?.copied || "Copied"}');this.previousElementSibling.blur()">${iconHTML}</span>`;
+        // Docbench: listeners instead of inline onmouseover/onclick attributes, which a nonce-only
+        // script-src CSP blocks.
+        const copyLabel = window.VditorI18n?.copy || "Copy";
+        const copiedLabel = window.VditorI18n?.copied || "Copied";
+        const spanElement = document.createElement("span");
+        spanElement.className = "vditor-tooltipped vditor-tooltipped__w";
+        spanElement.setAttribute("aria-label", copyLabel);
+        spanElement.innerHTML = iconHTML;
+        spanElement.addEventListener("mouseover", () => {
+            spanElement.setAttribute("aria-label", copyLabel);
+        });
+        spanElement.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const copyTextarea = spanElement.previousElementSibling as HTMLTextAreaElement;
+            copyTextarea.select();
+            document.execCommand("copy");
+            spanElement.setAttribute("aria-label", copiedLabel);
+            copyTextarea.blur();
+        });
+        divElement.append(spanElement);
         const textarea = document.createElement("textarea");
         textarea.value = code160to32(codeText);
         divElement.insertAdjacentElement("afterbegin", textarea);

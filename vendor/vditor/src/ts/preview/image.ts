@@ -17,12 +17,21 @@ export const previewImage = (oldImgElement: HTMLImageElement, lang: keyof II18n 
 </div>`);
     document.body.style.overflow = "hidden";
 
-    // Docbench: close through listeners instead of inline onclick attributes, which a nonce-only CSP blocks.
+    // Docbench: close through listeners instead of inline onclick attributes, which a nonce-only CSP blocks,
+    // and also with Escape.
     const overlayElement = document.body.lastElementChild as HTMLElement;
+    const onKey = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+            event.stopPropagation();
+            close();
+        }
+    };
     const close = () => {
         overlayElement.remove();
         document.body.style.overflow = "";
+        document.removeEventListener("keydown", onKey, true);
     };
+    document.addEventListener("keydown", onKey, true);
     overlayElement.querySelector('.vditor-img__btn[data-type="close"]').addEventListener("click", close);
     overlayElement.querySelector(".vditor-img__img").addEventListener("click", close);
 

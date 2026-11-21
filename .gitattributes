@@ -1,0 +1,3 @@
+# The Vditor fork is checked against SHA-256 hashes in vendor/vditor/PROVENANCE.md, so its files must be
+# checked out byte for byte as stored (LF), whatever core.autocrlf says.
+vendor/vditor/** -text

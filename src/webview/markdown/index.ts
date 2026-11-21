@@ -4,6 +4,7 @@ import './index.css';
 import { showError, vscodeApi } from '../common/vscode';
 import { htmlToDocxBase64 } from './toDocx';
 import { buildExportHtml } from './exportHtml';
+import { inlineLocalImages, isRemoteImage } from './localImages';
 
 const DEBOUNCE_MS = 250;
 
@@ -248,40 +249,6 @@ function setupOutline(editor: Vditor, width: number): void {
   });
 }
 
-/**
- * Double-clicking an image opens vditor's full-screen viewer. vditor closes it with inline
- * `onclick="..."` attributes, which our nonce-only script policy blocks, so Close did nothing.
- * Wire the same behaviour (Close button, click on the image, Escape) with real event listeners.
- */
-function watchImageViewer(): void {
-  const wire = (overlay: HTMLElement): void => {
-    const close = (): void => {
-      overlay.remove();
-      document.body.style.overflow = '';
-      document.removeEventListener('keydown', onKey, true);
-    };
-    const onKey = (e: KeyboardEvent): void => {
-      if (e.key === 'Escape') {
-        e.stopPropagation();
-        close();
-      }
-    };
-    document.addEventListener('keydown', onKey, true);
-    // The bar has two buttons: Spin (wired by vditor itself) and Close.
-    overlay.querySelectorAll('.vditor-img__btn')[1]?.addEventListener('click', close);
-    overlay.querySelector('.vditor-img__img')?.addEventListener('click', close);
-  };
-  new MutationObserver((records) => {
-    for (const record of records) {
-      record.addedNodes.forEach((node) => {
-        if (node instanceof HTMLElement && node.classList.contains('vditor-img')) {
-          wire(node);
-        }
-      });
-    }
-  }).observe(document.body, { childList: true });
-}
-
 function boot(): void {
   const app = document.getElementById('app');
   if (!app) {
@@ -294,7 +261,6 @@ function boot(): void {
     return;
   }
   markScriptsLoaded();
-  watchImageViewer();
 
   let editor: Vditor;
   let timer: number | undefined;
@@ -333,7 +299,9 @@ function boot(): void {
     if (remoteEnabled || noticeDismissed) {
       return;
     }
-    const hasRemote = Array.from(app.querySelectorAll('img')).some((i) => /^https?:/i.test(i.getAttribute('src') ?? ''));
+    // Relative images are rewritten to the https webview resource address (linkBase); those are local.
+    const base = document.body.dataset.linkBase ?? '';
+    const hasRemote = Array.from(app.querySelectorAll('img')).some((i) => isRemoteImage(i.getAttribute('src') ?? '', base));
     if (!hasRemote) {
       existing?.remove();
       return;
@@ -408,14 +376,18 @@ function boot(): void {
     }
     const base = document.body.dataset.linkBase ?? '';
     buildExportHtml(editor, 'docx')
-      .then((html) => htmlToDocxBase64(html, { allowRemoteImages: remoteEnabled, localBase: base ? (new URL(base).origin === 'null' ? base : new URL(base).origin) : '' }, document.title))
+      .then((html) => htmlToDocxBase64(html, { allowRemoteImages: remoteEnabled, localBase: base }, document.title))
       .then((data) => vscodeApi.postMessage({ type: 'exportDocx', data }))
       .catch((err) => vscodeApi.postMessage({ type: 'exportDocxFailed', message: String(err instanceof Error ? err.message : err) }));
   };
 
   const exportPdf = (): void => {
     if (editor?.vditor) {
-      void buildExportHtml(editor, 'pdf').then((html) => vscodeApi.postMessage({ type: 'exportPdf', html }));
+      // The print page cannot reach the webview resource host, so local images go in as data: URLs.
+      const base = document.body.dataset.linkBase ?? '';
+      void buildExportHtml(editor, 'pdf')
+        .then((html) => inlineLocalImages(html, base))
+        .then((html) => vscodeApi.postMessage({ type: 'exportPdf', html }));
     }
   };
 

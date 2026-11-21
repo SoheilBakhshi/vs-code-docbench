@@ -18,6 +18,7 @@ import {
   TextRun,
   WidthType,
 } from 'docx';
+import { isLocalResource } from './localImages';
 
 type Block = Paragraph | Table;
 type Inline = TextRun | ExternalHyperlink | ImageRun;
@@ -34,7 +35,7 @@ interface Style {
 export interface DocxOptions {
   /** Fetch images that live on the internet (otherwise they become their alt text). */
   allowRemoteImages: boolean;
-  /** Origin prefix of locally served images (the webview's resource URL); those are always fetched. */
+  /** The webview's resource address for the document's folder (linkBase); images on that host are always fetched. */
   localBase: string;
 }
 
@@ -87,7 +88,7 @@ function imageSize(b: Uint8Array, kind: 'png' | 'jpg' | 'gif' | 'bmp'): { w: num
 
 async function loadImage(src: string, opts: DocxOptions): Promise<{ data: Uint8Array; type: 'png' | 'jpg' | 'gif' | 'bmp'; w: number; h: number } | undefined> {
   const isData = src.startsWith('data:');
-  const isLocal = opts.localBase !== '' && src.startsWith(opts.localBase);
+  const isLocal = isLocalResource(src, opts.localBase);
   const isRemote = /^https?:/i.test(src) && !isLocal;
   if (isRemote && !opts.allowRemoteImages) return undefined;
   if (!isData && !isLocal && !isRemote) return undefined;
