@@ -23,7 +23,8 @@ if (drift.length) {
 }
 console.log(`dependencies match package-lock.json (${Object.keys(lock.packages).length - 1} entries)`);
 const vsix = `docbench-${version}.vsix`;
-const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'inherit', shell: process.platform === 'win32' });
+// Windows needs a shell to run npm (npm.cmd), but not node itself, whose path may contain spaces.
+const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'inherit', shell: process.platform === 'win32' && cmd === 'npm' });
 run('npm', ['run', 'package']);
 run(process.execPath, ['scripts/content-policy/check.mjs', 'vsix', vsix, '--report']);
 run(process.execPath, ['scripts/check-package.mjs', vsix]);

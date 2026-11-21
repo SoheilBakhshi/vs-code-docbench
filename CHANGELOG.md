@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.7
+
+### Internal
+- `npm run check:release` now also works on Windows when Node.js is installed in a folder whose path contains spaces. No change to the extension itself.
+
 ## 0.6.6
 
 ### Fixed
